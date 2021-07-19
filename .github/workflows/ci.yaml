@@ -8,10 +8,6 @@ on:
         description: reason to run this workflow
         required: false
         default: test
-  check_run:
-    types:
-    - rerequested
-    - requested_action
   pull_request:
     branches:
     - master
@@ -29,3 +25,13 @@ jobs:
     - name: Lint
       run: |
         make lint.all
+
+    - name: Install dukkha
+      uses: arhat-dev/actions-setup-dukkha@master
+
+    - name: Check dukkha installed
+      run: |-
+        if !command -v dukkha ; then
+          echo "dukkha NOT INSTALLED to PATH!"
+          exit 1
+        fi
