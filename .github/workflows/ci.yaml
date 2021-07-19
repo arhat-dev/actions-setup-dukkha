@@ -31,7 +31,7 @@ jobs:
 
     - name: Check dukkha installed
       run: |-
-        if !command -v dukkha ; then
+        if ! command -v dukkha ; then
           echo "dukkha NOT INSTALLED to PATH!"
           exit 1
         fi
