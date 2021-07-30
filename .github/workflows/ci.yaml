@@ -35,3 +35,5 @@ jobs:
           echo "dukkha NOT INSTALLED to PATH!"
           exit 1
         fi
+
+        dukkha version

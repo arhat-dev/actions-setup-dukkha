@@ -4,12 +4,18 @@ author: The Arhat Dev Authors
 branding:
   color: blue
 inputs:
-  image:
-    description: image containing /dukkha
-    default: ghcr.io/arhat-dev/dukkha:latest
+  version:
+    description: dukkha version
+    default: latest
+
 runs:
   using: composite
   steps:
+  # setup go to build sget
+  - uses: actions/setup-go@v2
+    with:
+      go-version: 1.16.x
+
   - shell: bash
     run: |
-      bash "${GITHUB_ACTION_PATH}/install-dukkha.sh" "${{ inputs.image }}"
+      bash "${GITHUB_ACTION_PATH}/install-dukkha.sh" "${{ inputs.version }}"

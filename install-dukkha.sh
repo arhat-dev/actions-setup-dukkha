@@ -2,13 +2,22 @@
 
 set -eux
 
-dukkha_image="$1"
+version="$1"
+
+cd "${GITHUB_ACTION_PATH}"
+
+git clone --depth 1 --branch v1.0.0 \
+  https://github.com/sigstore/cosign.git cosign-src
+
+cd cosign-src
+go build -mod=readonly -trimpath -ldflags="-s -w" -o ../sget ./cmd/sget
+cd -
 
 cache_dir="$(mktemp -d)"
 
-docker pull "${dukkha_image}"
-ctr_id="$(docker create "${dukkha_image}" : 2>/dev/null)"
-docker cp "${ctr_id}:/dukkha" "${cache_dir}/dukkha"
+./sget -key https://arhat.dev/.well-known/cosign.pub \
+  -o "${cache_dir}/dukkha" \
+  "ghcr.io/arhat-dev/dist/dukkha:${version}-$(go env GOHOSTOS)-$(go env GOHOSTARCH)"
 
 chmod +x "${cache_dir}/dukkha"
 
