@@ -12,20 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-RUN_LINTER := docker run -t --rm -v "$(shell pwd):$(shell pwd)" -w "$(shell pwd)"
+DOCKER_CLI ?= docker run -t
+RUN_CTR_APP := ${DOCKER_CLI} --rm -v "$(shell pwd):$(shell pwd)" -w "$(shell pwd)"
 
 lint.file:
-	${RUN_LINTER} ghcr.io/arhat-dev/editorconfig-checker:2.3 \
+	${RUN_CTR_APP} ghcr.io/arhat-dev/editorconfig-checker:2.3 \
 		editorconfig-checker -config .ecrc
 
 lint.shell:
-	${RUN_LINTER} koalaman/shellcheck-alpine:stable \
+	${RUN_CTR_APP} koalaman/shellcheck-alpine:stable \
 		sh -c "find . | grep -E -e '.sh\$$' | \
 			grep -v vendor | grep -v build | grep -v \.git | \
 			xargs -I'{}' shellcheck -S warning -e SC1090 -e SC1091 {} ;"
 
 lint.yaml:
-	${RUN_LINTER} ghcr.io/arhat-dev/yamllint:1.26 \
+	${RUN_CTR_APP} ghcr.io/arhat-dev/yamllint:1.26 \
 		yamllint -c .yaml-lint.yml .
 
 lint.all: \
