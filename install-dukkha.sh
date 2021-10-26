@@ -15,7 +15,7 @@ cd -
 
 cache_dir="$(mktemp -d)"
 
-./sget -key https://arhat.dev/.well-known/cosign.pub \
+./sget --key https://arhat.dev/.well-known/cosign.pub \
   -o "${cache_dir}/dukkha" \
   "ghcr.io/arhat-dev/dist/dukkha:${version}-$(go env GOHOSTOS)-$(go env GOHOSTARCH)"
 
