@@ -4,14 +4,10 @@
 
 ```yaml
 # setup go in your own workflow to build sget
-# this is required since github doesn't support `uses` in compisite actions
-# https://github.com/actions/runner/issues/646
-- uses: actions/setup-go@v2
-  with:
-    go-version: 1.16.x
-
 - name: Install dukkha
   uses: arhat-dev/actions-setup-dukkha@master
+  with:
+    version: latest
 ```
 
 ## LICENSE

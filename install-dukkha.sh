@@ -6,7 +6,7 @@ version="$1"
 
 cd "${GITHUB_ACTION_PATH}"
 
-git clone --depth 1 --branch v1.2.1 \
+git clone --depth 1 --branch v1.3.0 \
   https://github.com/sigstore/cosign.git cosign-src
 
 cd cosign-src
