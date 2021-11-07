@@ -7,13 +7,16 @@ inputs:
   version:
     description: dukkha version
     default: latest
+  go-version:
+    description: golang version to compile sget from source
+    default: 1.17.x
 
 runs:
   using: composite
   steps:
   - uses: actions/setup-go@v2
     with:
-      go-version: 1.17.x
+      go-version: ${{ inputs.go-version }}
 
   - shell: bash
     run: |

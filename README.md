@@ -8,6 +8,9 @@
   uses: arhat-dev/actions-setup-dukkha@master
   with:
     version: latest
+    # set version of go used to compile dukkha
+    # it will install go to your action environment
+    go-version: 1.17.x
 ```
 
 ## LICENSE
