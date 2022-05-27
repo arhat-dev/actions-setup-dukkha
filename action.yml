@@ -9,7 +9,7 @@ inputs:
     default: latest
   go-version:
     description: golang version to compile sget from source
-    default: 1.17.x
+    default: 1.18.x
 
 runs:
   using: composite
